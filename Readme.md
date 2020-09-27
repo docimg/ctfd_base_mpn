@@ -1,7 +1,19 @@
 ### 默认服务
-mariadb: 10
-php: 7.4.10
-nginx: 1.18.0
+- mariadb: 10
+- php: 7.4.10
+- nginx: 1.18.0
+
+### 使用方法
+```
+FROM docimg/ctfd_base_mpn:v1.0
+
+COPY src/ /var/www/html/
+COPY flag.sh /flag.sh
+COPY config.sh /config.sh
+
+```
+
+示例：[2020-巅峰极客-MeowWorld](https://github.com/docimg/ctf_history_replay/tree/master/2020-%E5%B7%85%E5%B3%B0%E6%9E%81%E5%AE%A2/meowworld)
 
 ### 关于ctfd动态容器
 ctfd动态容器会在结尾调用docker-php-entrypoint启动容器(覆盖原dockerfile)
@@ -21,9 +33,6 @@ ctfd动态容器会在结尾调用docker-php-entrypoint启动容器(覆盖原doc
 | demo/                        | config.sh和flag.sh的示例代码                               |
 
 
-
-
-
 #### 配置文件
 
 mysql
@@ -40,12 +49,12 @@ nginx
 ### 构建命令
 ```bash
 docker build -t docimg/ctfd_base_mpn:v1.0 .
-docker run -d --rm --name mpn -p 6666:80 docimg/ctfd_base_mpn:v1.0
+docker run -d --rm --name mpn -e FLAG=flag{88888888-8888-8888-8888-888888888888} -p 6666:80 docimg/ctfd_base_mpn:v1.0
 
 docker push docimg/ctfd_base_mpn:v1.0
 docker exec -it mpn /bin/sh
 
-docker-compose up -d
+docker-compose up --build -d
 docker-compose ps
 docker-compose down
 ```
