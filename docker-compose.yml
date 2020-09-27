@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    build: .
+    image: docimg/ctfd_base_mpn:v1.0
+    ports:
+      - "6666:80"
+    container_name: ctfd_base_mpn
+    environment:
+      - FLAG=flag{88888888-8888-8888-8888-888888888888}
