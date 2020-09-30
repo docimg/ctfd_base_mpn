@@ -9,7 +9,6 @@ FROM docimg/ctfd_base_mpn:v1.0
 
 COPY src/ /var/www/html/
 COPY flag.sh /flag.sh
-COPY config.sh /config.sh
 
 ```
 
@@ -26,11 +25,10 @@ ctfd动态容器会在结尾调用docker-php-entrypoint启动容器(覆盖原doc
 | ---------------------------- | ---------------------------------------------------------- |
 | _files/                      | 一些配置文件                                               |
 | _files/default.conf          | nginx解析php                                               |
-| _files/docker-php-entrypoint | 启动系统服务，执行/config.sh和/flag.sh，重置FLAG环境变量等 |
+| _files/docker-php-entrypoint | 启动系统服务，执行/flag.sh，重置FLAG环境变量等             |
 | _files/my.cnf                | mysql配置文件，覆盖原有文件                                |
-| /config.sh                   | 如果文件存在则在服务启动后调用                             |
-| /flag.sh                     | 如果文件存在则在服务启动后调用                             |
-| demo/                        | config.sh和flag.sh的示例代码                               |
+| /flag.sh                     | 如果文件存在则在web服务启动前调用                          |
+| demo/                        | flag.sh的示例代码                                          |
 
 
 #### 配置文件

@@ -9,10 +9,13 @@ mysql_ready() {
     mysqladmin ping --socket=/etc/mysql/mysql.sock --user=root > /dev/null 2>&1
 }
 
-if [ -f "/config.sh" ];then
+if [ -f "/flag.sh" ];then
   echo "[+] config before service start"
-  source /config.sh
+  source /flag.sh
 fi
+
+export FLAG=not_here
+FLAG=not_here
 
 echo "[+] start default services"
 while !(mysql_ready)
@@ -30,13 +33,5 @@ nginx
 echo "[+] init mysql"
 mysql -uroot -proot -e "DROP DATABASE IF EXISTS test;DELETE FROM mysql.user WHERE user='';"
 mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION;FLUSH PRIVILEGES;"
-
-if [ -f "/flag.sh" ];then
-  echo "[+] set flag after service started"
-  source /flag.sh
-fi
-
-export FLAG=not_here
-FLAG=not_here
 
 tail -f /dev/null
