@@ -12,7 +12,4 @@ echo $FLAG > /flag
 chmod 440 /flag
 chmod 4555 /readflag
 
-export FLAG=not_here
-FLAG=not_here
-
 rm -rf /flag.sh
