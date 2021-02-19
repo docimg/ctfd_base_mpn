@@ -30,8 +30,9 @@ done
 php-fpm &
 nginx
 
-echo "[+] init mysql"
-mysql -uroot -proot -e "DROP DATABASE IF EXISTS test;DELETE FROM mysql.user WHERE user='';"
-mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION;FLUSH PRIVILEGES;"
+if [ -f "/tmp/initdb.sql" ];then
+  echo "[+] init mysql"
+  mysql -uroot -proot -e "SOURCE /tmp/initdb.sql;"
+fi
 
 tail -f /dev/null

@@ -2,7 +2,7 @@ version: "3"
 services:
   web:
     build: .
-    image: docimg/ctfd_base_mpn:v1.0
+    image: docimg/ctfd_base_mpn:v1.1
     ports:
       - "6666:80"
     container_name: ctfd_base_mpn
