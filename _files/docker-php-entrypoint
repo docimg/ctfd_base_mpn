@@ -33,6 +33,7 @@ nginx
 if [ -f "/tmp/initdb.sql" ];then
   echo "[+] init mysql"
   mysql -uroot -proot -e "SOURCE /tmp/initdb.sql;"
+  rm /tmp/initdb.sql
 fi
 
 tail -f /dev/null
